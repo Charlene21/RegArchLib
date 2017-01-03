@@ -22,14 +22,14 @@ cARCH::cARCH(const cARCH& orig) {
 cARCH::~cARCH() {
 }
 
-//double cARCH:: mComputeMean(const cData& theData, int theNbCompute) const{
-//    double res = 0;
-//    for (int i = 0; i< mParams->GetSize(); i++){
-//        res = mParams->operator [](i)*theData.mUt.operator [](theNbCompute-(i+1)); 
-//    }
-//    return res;
-//}
-//
-//cMeanModel* cMA::ptrCopy() const{
-//    return NULL;
-//}
+double cARCH:: mComputeMean(const cData& theData, int theNbCompute) const{
+    double res = 0;
+    for (int i = 0; i< mParams->GetSize(); i++){
+        res = mParams->operator [](i)*pow(theData.mUt.operator [](theNbCompute-(i+1)),2); 
+    }
+    return res;
+}
+
+cMeanModel* cARCH::ptrCopy() const{
+    return NULL;
+}
