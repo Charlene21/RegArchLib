@@ -21,6 +21,8 @@ public:
     cARCH();
     cARCH(const cARCH& orig);
     virtual ~cARCH();
+    double mComputeMean(const cData& theData, int theNbCompute) const;
+    cMeanModel* ptrCopy() const;
 private:
 
 };
