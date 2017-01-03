@@ -15,14 +15,15 @@
 #define CARCH_H
 
 #include "cMeanModel.h"
+#include "cVarModel.h"
 
-class cARCH : public cMeanModel {
+class cARCH : public cVarModel {
 public:
     cARCH();
     cARCH(const cARCH& orig);
     virtual ~cARCH();
-    double mComputeMean(const cData& theData, int theNbCompute) const;
-    cMeanModel* ptrCopy() const;
+    double mComputeVar(const cData& theData, int theNbCompute) const;
+    cVarModel* ptrCopy() const;
 private:
 
 };

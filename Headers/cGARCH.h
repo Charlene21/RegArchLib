@@ -15,14 +15,15 @@
 #define CGARCH_H
 
 #include "cMeanModel.h"
+#include "cVarModel.h"
 
-class cGARCH : public cMeanModel {
+class cGARCH : public cVarModel {
 public:
     cGARCH();
     cGARCH(const cGSLVector& theParam);
     cGARCH(const cGARCH& orig);
-    virtual double mComputeMean(const cData& theData, int theNbCompute) const;
-    virtual cMeanModel* ptrCopy() const;
+    virtual double mComputeVar(const cData& theData, int theNbCompute) const;
+    virtual cVarModel* ptrCopy() const;
     virtual ~cGARCH();
 private:
 

@@ -19,11 +19,11 @@ cGARCH::cGARCH() {
 cGARCH::cGARCH(const cGARCH& orig) {
 }
 
-cGARCH::cGARCH(const cGSLVector& theParam) : cMeanModel(theParam) {
+cGARCH::cGARCH(const cGSLVector& theParam) : cVarModel(theParam) {
  
 }
 
-double cGARCH::mComputeMean(const cData& theData, int theNbCompute) const {
+double cGARCH::mComputeVar(const cData& theData, int theNbCompute) const {
     double res = 0;
     for (int i = 0; i< mParams->GetSize(); i++){
         res = mParams->operator [](i)*theData.mHt.operator [](theNbCompute-(i+1)); 
@@ -31,7 +31,7 @@ double cGARCH::mComputeMean(const cData& theData, int theNbCompute) const {
     return res;
 }
 
-cMeanModel* cGARCH::ptrCopy() const {
+cVarModel* cGARCH::ptrCopy() const {
     return NULL;
 }
 
