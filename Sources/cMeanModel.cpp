@@ -14,6 +14,11 @@
 #include "cMeanModel.h"
 
 cMeanModel::cMeanModel() {
+
+}
+
+cMeanModel::cMeanModel(const cGSLVector& theParam) {
+    mParams = new cGSLVector(theParam);
 }
 
 cMeanModel::cMeanModel(const cMeanModel& orig) {
@@ -22,11 +27,8 @@ cMeanModel::cMeanModel(const cMeanModel& orig) {
 cMeanModel::~cMeanModel() {
 }
 
-cData& cMeanModel::operator = (const cData & data){
+cData& cMeanModel::operator = (const cData & theData){
     
 }
 
-double cMeanModel::mComputeMean(cData *data, int nbCompute){
-    
-}
 

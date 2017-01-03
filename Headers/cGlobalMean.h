@@ -13,12 +13,12 @@
 
 #ifndef CGLOBALMEAN_H
 #define CGLOBALMEAN_H
-#include<list>
+#include <list>
 #include "cMeanModel.h"
 
 class cGlobalMean {
 public:
-    std::list<cMeanModel> mMean;
+    std::list<cMeanModel *> mMean;
     cGlobalMean();
     cGlobalMean(const cGlobalMean& orig);
     double mComputeMean();

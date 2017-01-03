@@ -19,7 +19,10 @@
 class cAR : public cMeanModel {
 public:
     cAR();
+    cAR(const cGSLVector& theParam);
     cAR(const cAR& orig);
+    virtual double mComputeMean(const cData& theData, int theNbCompute) const;
+    virtual cMeanModel* ptrCopy() const;
     virtual ~cAR();
 private:
 

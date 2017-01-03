@@ -21,11 +21,13 @@ using namespace VectorAndMatrixNameSpace;
 class cMeanModel {
 public:
     
-    cGSLVector mParams;
+    cGSLVector *mParams;
     cMeanModel();
+    cMeanModel(const cGSLVector& theParam);
     cMeanModel(const cMeanModel& orig);
-    cData& operator = (const cData & data);
-    virtual double mComputeMean(cData *data, int nbCompute);
+    cData& operator = (const cData & theData);
+    virtual double mComputeMean(const cData& theData, int theNbCompute) const = 0; //passage par copie => ajouter référence pour ne pas recopier
+    virtual cMeanModel* ptrCopy() const = 0;
     virtual ~cMeanModel();
 private:
 

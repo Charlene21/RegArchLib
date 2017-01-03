@@ -12,13 +12,27 @@
  */
 
 #include "cAR.h"
+#include <cstdlib>
 
-cAR::cAR() {
+cAR::cAR(){
+ 
+}
+
+cAR::cAR(const cGSLVector& theParam) : cMeanModel(theParam){
+ 
 }
 
 cAR::cAR(const cAR& orig) {
 }
 
 cAR::~cAR() {
+}
+
+double cAR:: mComputeMean(const cData& theData, int theNbCompute) const{
+    return 0;
+}
+
+cMeanModel* cAR::ptrCopy() const{
+    return NULL;
 }
 
