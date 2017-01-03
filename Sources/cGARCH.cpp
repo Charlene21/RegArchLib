@@ -19,6 +19,22 @@ cGARCH::cGARCH() {
 cGARCH::cGARCH(const cGARCH& orig) {
 }
 
+cGARCH::cGARCH(const cGSLVector& theParam) : cMeanModel(theParam) {
+ 
+}
+
+double cGARCH::mComputeMean(const cData& theData, int theNbCompute) const {
+    double res = 0;
+    for (int i = 0; i< mParams->GetSize(); i++){
+        res = mParams->operator [](i)*theData.mHt.operator [](theNbCompute-(i+1)); 
+    }
+    return res;
+}
+
+cMeanModel* cGARCH::ptrCopy() const {
+    return NULL;
+}
+
 cGARCH::~cGARCH() {
 }
 

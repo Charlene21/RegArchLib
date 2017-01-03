@@ -19,7 +19,10 @@
 class cGARCH : public cMeanModel {
 public:
     cGARCH();
+    cGARCH(const cGSLVector& theParam);
     cGARCH(const cGARCH& orig);
+    virtual double mComputeMean(const cData& theData, int theNbCompute) const;
+    virtual cMeanModel* ptrCopy() const;
     virtual ~cGARCH();
 private:
 
