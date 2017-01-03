@@ -29,7 +29,11 @@ cAR::~cAR() {
 }
 
 double cAR:: mComputeMean(const cData& theData, int theNbCompute) const{
-    return 0;
+    double res = 0;
+    for (int i = 0; i< mParams->GetSize(); i++){
+        res = mParams->operator [](i)*theData.mYt.operator [](theNbCompute-(i+1)); 
+    }
+    return res;
 }
 
 cMeanModel* cAR::ptrCopy() const{

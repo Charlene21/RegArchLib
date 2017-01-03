@@ -21,6 +21,8 @@ public:
     cMA();
     cMA(const cMA& orig);
     virtual ~cMA();
+    double mComputeMean(const cData& theData, int theNbCompute) const;
+    cMeanModel* ptrCopy() const;
 private:
 
 };
