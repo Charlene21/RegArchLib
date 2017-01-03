@@ -14,12 +14,19 @@
 #ifndef CVARMODEL_H
 #define CVARMODEL_H
 
+#include "cData.h"
+#include "StdAfxVectorAndMatrix.h"
+using namespace VectorAndMatrixNameSpace;
+
 class cVarModel {
 public:
-    
+    cGSLVector *mParams;
     cVarModel();
+    cVarModel(const cGSLVector& theParam);
     cVarModel(const cVarModel& orig);
-    double mComputeVar();
+    cData& operator = (const cData & theData);
+    virtual double mComputeVar(const cData& theData, int theNbCompute) const = 0; //passage par copie => ajouter référence pour ne pas recopier
+    virtual cVarModel* ptrCopy() const = 0;
     virtual ~cVarModel();
 private:
 

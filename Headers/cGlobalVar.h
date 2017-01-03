@@ -21,7 +21,7 @@ using namespace std;
 
 class cGlobalVar {
 public:
-    std::list<cVarModel> mVar;
+    std::list<cVarModel*> mVar;
     cGlobalVar();
     cGlobalVar(const cGlobalVar& orig);
     double mComputeVar();
