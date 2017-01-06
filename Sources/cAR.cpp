@@ -31,7 +31,7 @@ cAR::~cAR() {
 double cAR:: mComputeMean(const cData& theData, int theNbCompute) const{
     double res = 0;
     for (int i = 0; i< mParams->GetSize(); i++){
-        res = mParams->operator [](i)*theData.mYt.operator [](theNbCompute-(i+1)); 
+        res += (*mParams)[i]*theData.mYt[theNbCompute-(i+1)]; 
     }
     return res;
 }
