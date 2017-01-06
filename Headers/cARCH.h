@@ -20,6 +20,7 @@
 class cARCH : public cVarModel {
 public:
     cARCH();
+    cARCH(const cGSLVector& theParam);
     cARCH(const cARCH& orig);
     virtual ~cARCH();
     double mComputeVar(const cData& theData, int theNbCompute) const;

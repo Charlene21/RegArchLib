@@ -21,6 +21,7 @@ cVarModel::cVarModel(const cGSLVector& theParam) {
 }
 
 cVarModel::cVarModel(const cVarModel& orig) {
+    mParams = new cGSLVector(*(orig.mParams));
 }
 
 cData& cVarModel::operator = (const cData & theData){
