@@ -19,6 +19,10 @@ cMA::cMA() {
 cMA::cMA(const cMA& orig) {
 }
 
+cMA::cMA(const cGSLVector& theParam) : cMeanModel(theParam){
+ 
+}
+
 cMA::~cMA() {
 }
 
