@@ -28,8 +28,8 @@ cARCH::~cARCH() {
 
 double cARCH:: mComputeVar(const cData& theData, int theNbCompute) const{
     double res = 0;
-    for (int i = 0; i< mParams->GetSize(); i++){
-        res = mParams->operator [](i)*pow(theData.mUt.operator [](theNbCompute-(i+1)),2); 
+    for (int i = 0; i< mParams->GetSize(); i++){      
+        res += (*mParams)[i]*pow(theData.mUt[theNbCompute-(i+1)],2); 
     }
     return res;
 }

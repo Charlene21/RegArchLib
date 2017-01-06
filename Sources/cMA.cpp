@@ -16,7 +16,7 @@
 cMA::cMA() {
 }
 
-cMA::cMA(const cMA& orig) {
+cMA::cMA(const cMA& orig) : cMeanModel(orig) {
 }
 
 cMA::~cMA() {
@@ -25,12 +25,12 @@ cMA::~cMA() {
 double cMA:: mComputeMean(const cData& theData, int theNbCompute) const{
     double res = 0;
     for (int i = 0; i< mParams->GetSize(); i++){
-        res = mParams->operator [](i)*theData.mUt.operator [](theNbCompute-(i+1)); 
+        res += (*mParams)[i]*theData.mUt[theNbCompute-(i+1)]; 
     }
     return res;
 }
 
 cMeanModel* cMA::ptrCopy() const{
-    return NULL;
+    return new cMA(*this);
 }
 
