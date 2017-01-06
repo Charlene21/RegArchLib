@@ -21,8 +21,8 @@
 class cRegArchModel {
 public:
     
-    cGlobalMean mGlobalMean;
-    cGlobalVar mGlobalVar;
+    cGlobalMean *mGlobalMean;
+    cGlobalVar *mGlobalVar;
     cResiduals *mResiduals;
     
     cRegArchModel();

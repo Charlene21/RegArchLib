@@ -22,3 +22,13 @@ cGlobalVar::cGlobalVar(const cGlobalVar& orig) {
 cGlobalVar::~cGlobalVar() {
 }
 
+double cGlobalVar::mComputeVar(const cData& theData, int theNbCompute) const {
+    double myVar = 0;
+    for (list<cVarModel*>::const_iterator myIt = mVar.begin(); myIt != mVar.end(); myIt++) {
+        myVar += (*myIt)->mComputeVar(theData, theNbCompute);
+    }
+    /* ATTENTION 
+     Ne pas oublier de rajouter la constante et l'autre facteur !!!!
+     */
+    return myVar;
+}

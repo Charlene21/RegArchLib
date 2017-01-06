@@ -19,6 +19,7 @@
 class cMA : public cMeanModel {
 public:
     cMA();
+    cMA(const cGSLVector& theParam);
     cMA(const cMA& orig);
     virtual ~cMA();
     double mComputeMean(const cData& theData, int theNbCompute) const;
