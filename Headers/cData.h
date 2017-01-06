@@ -19,10 +19,10 @@ using namespace VectorAndMatrixNameSpace;
 
 class cData {
 public:
-    cGSLVector mYt;
-    cGSLVector mUt;
-    cGSLVector mHt;
-    cGSLVector mEt;
+    cGSLVector* mYt;
+    cGSLVector* mUt;
+    cGSLVector* mHt;
+    cGSLVector* mEt;
     
     cData();
     cData(const cData& orig);
