@@ -16,7 +16,7 @@
 cGARCH::cGARCH() {
 }
 
-cGARCH::cGARCH(const cGARCH& orig) {
+cGARCH::cGARCH(const cGARCH& orig) : cVarModel(orig) {
 }
 
 cGARCH::cGARCH(const cGSLVector& theParam) : cVarModel(theParam) {
@@ -32,7 +32,7 @@ double cGARCH::mComputeVar(const cData& theData, int theNbCompute) const {
 }
 
 cVarModel* cGARCH::ptrCopy() const {
-    return NULL;
+    return new cGARCH(*this);
 }
 
 cGARCH::~cGARCH() {

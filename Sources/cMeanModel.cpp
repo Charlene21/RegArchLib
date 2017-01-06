@@ -22,6 +22,8 @@ cMeanModel::cMeanModel(const cGSLVector& theParam) {
 }
 
 cMeanModel::cMeanModel(const cMeanModel& orig) {
+    mParams = new cGSLVector(*(orig.mParams));
+    
 }
 
 cMeanModel::~cMeanModel() {

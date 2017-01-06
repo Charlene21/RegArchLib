@@ -16,7 +16,11 @@
 cARCH::cARCH() {
 }
 
-cARCH::cARCH(const cARCH& orig) {
+cARCH::cARCH(const cGSLVector& theParam) : cVarModel(theParam) {
+ 
+}
+
+cARCH::cARCH(const cARCH& orig) : cVarModel(orig){
 }
 
 cARCH::~cARCH() {
@@ -31,5 +35,5 @@ double cARCH:: mComputeVar(const cData& theData, int theNbCompute) const{
 }
 
 cVarModel* cARCH::ptrCopy() const{
-    return NULL;
+    return new cARCH(*this);
 }

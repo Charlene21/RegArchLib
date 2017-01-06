@@ -22,7 +22,7 @@ cAR::cAR(const cGSLVector& theParam) : cMeanModel(theParam){
  
 }
 
-cAR::cAR(const cAR& orig) {
+cAR::cAR(const cAR& orig) : cMeanModel(orig){
 }
 
 cAR::~cAR() {
@@ -37,6 +37,6 @@ double cAR:: mComputeMean(const cData& theData, int theNbCompute) const{
 }
 
 cMeanModel* cAR::ptrCopy() const{
-    return NULL;
+    return new cAR(*this); 
 }
 
