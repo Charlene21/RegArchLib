@@ -16,14 +16,17 @@
 #include "cMA.h"
 
 cGlobalMean::cGlobalMean() : mMean() {
-    // Version Provisoire pour tester nos fonctions
-    cGSLVector const *myVect = new cGSLVector(1,6);
-    cAR * myAR = new cAR(*myVect);
-    cGSLVector const *myVect2 = new cGSLVector(1,7);
-    cMA * myMA = new cMA(*myVect2);
     
-    this->mMean.push_back(myAR);
-    this->mMean.push_back(myMA);
+    
+    
+}
+
+void cGlobalMean :: addMean (cMeanModel *theModel){
+    mMean.push_back(theModel->ptrCopy());
+}
+
+int cGlobalMean :: sizeMean () const{
+    return mMean.size();
 }
 
 cGlobalMean::cGlobalMean(const cGlobalMean& orig) {
