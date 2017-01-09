@@ -14,6 +14,7 @@
 #include "cRegArchModel.h"
 
 cRegArchModel::cRegArchModel() {
+    this->mGlobalMean = new cGlobalMean();
 }
 
 cRegArchModel::cRegArchModel(const cRegArchModel& orig) {

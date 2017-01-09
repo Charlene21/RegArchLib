@@ -24,7 +24,7 @@ public:
     std::list<cVarModel*> mVar;
     cGlobalVar();
     cGlobalVar(const cGlobalVar& orig);
-    double mComputeVar(const cData& theData, int theNbCompute);
+    double mComputeVar(const cData& theData, int theNbCompute) const;
     double mGradient();
     virtual ~cGlobalVar();
 private:
