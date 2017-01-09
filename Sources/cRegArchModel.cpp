@@ -40,17 +40,17 @@ double cRegArchModel::mLogLikelihood(cData *theData){
 }
 
 void cRegArchModel::mSimulate(cData& theData, int t) {
-    theData.mYt->ReAlloc(t, 0);
-    theData.mMt->ReAlloc(t, 0);
-    theData.mHt->ReAlloc(t, 0);
-    theData.mUt->ReAlloc(t, 0);
-    theData.mEt->ReAlloc(t, 0);
+    theData.mYt->ReAlloc(t, 0.);
+    theData.mMt->ReAlloc(t, 0.);
+    theData.mHt->ReAlloc(t, 0.);
+    theData.mUt->ReAlloc(t, 0.);
+    theData.mEt->ReAlloc(t, 0.);
     
     theData.mEt = mResiduals->mSimul(t);
     for (int i = 0; i < t; i++) {
-        theData.mMt = mGlobalMean->mComputeMean(theData, t);
-        theData.mHt = mGlobalVar->mComputeVar(theData, t);
-        theData.mYt = theData.mMt[t] + sqrt(theData.mHt[t]) * theData.mEt[t];
-        theData.mUt = theData.mYt[t] - theData.mMt[t];
+        theData.mMt[t] = mGlobalMean->mComputeMean(theData, t);
+        theData.mHt[t] = mGlobalVar->mComputeVar(theData, t);
+        theData.mYt[t] = (*theData.mMt)[t] + sqrt((*theData.mHt)[t]) * (*theData.mEt)[t];
+        theData.mUt[t] = (*theData.mYt)[t] - (*theData.mMt)[t];
     }
 }
