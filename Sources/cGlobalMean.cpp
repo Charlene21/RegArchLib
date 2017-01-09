@@ -16,9 +16,7 @@
 #include "cMA.h"
 
 cGlobalMean::cGlobalMean() : mMean() {
-    
-    
-    
+      
 }
 
 void cGlobalMean :: addMean (cMeanModel *theModel){

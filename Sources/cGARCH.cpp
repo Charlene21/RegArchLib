@@ -26,7 +26,7 @@ cGARCH::cGARCH(const cGSLVector& theParam) : cVarModel(theParam) {
 double cGARCH::mComputeVar(const cData& theData, int theNbCompute) const {
     double res = 0;
     for (int i = 0; i< mParams->GetSize(); i++){
-        res += (*mParams)[i]* theData.mHt->operator [](theNbCompute-(i+1)); 
+        res += (*mParams)[i]* (*(theData.mHt))[theNbCompute-(i+1)]; 
     }
     return res;
 }
