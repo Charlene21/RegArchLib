@@ -21,7 +21,7 @@ public:
     std::list<cMeanModel *> mMean;
     cGlobalMean();
     cGlobalMean(const cGlobalMean& orig);
-    double mComputeMean();
+    double mComputeMean(const cData& theData, int theNbCompute);
     double mGradient();
     virtual ~cGlobalMean();
 private:

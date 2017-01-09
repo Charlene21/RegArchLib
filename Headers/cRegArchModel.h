@@ -26,8 +26,9 @@ public:
     cResiduals *mResiduals;
     
     cRegArchModel();
-    cRegArchModel(const cRegArchModel& orig);   
-    double mLogLikelihood(cData *data);
+    cRegArchModel(const cRegArchModel& orig); 
+    
+    double mLogLikelihood(cData *theData);
     void mSimulate(cData &data,int);
     virtual ~cRegArchModel();
 private:
