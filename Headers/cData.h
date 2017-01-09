@@ -23,6 +23,7 @@ public:
     cGSLVector* mUt;
     cGSLVector* mHt;
     cGSLVector* mEt;
+    cGSLVector* mMt;
     
     cData();
     cData(const cData& orig);
