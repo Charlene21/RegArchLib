@@ -22,9 +22,9 @@ public:
     cGSLVector mParams;
     cResiduals();
     cResiduals(const cResiduals& orig);
-    cGSLVector mSimul(int);
-    double mDensite(double, bool log);
-    void mGradient(cData &data, cGSLVector &vect);
+    virtual cGSLVector* mSimul(int) = 0;
+    virtual double mDensite(double, bool log) const = 0;
+    void mGradient(cData &data, cGSLVector &vect) const;
     virtual ~cResiduals();
 private:
 

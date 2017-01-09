@@ -29,7 +29,7 @@ public:
     cRegArchModel(const cRegArchModel& orig); 
     
     double mLogLikelihood(cData *theData);
-    void mSimulate(cData &data,int);
+    void mSimulate(cData &data, int t);
     virtual ~cRegArchModel();
 private:
 

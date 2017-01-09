@@ -11,6 +11,8 @@
  * Created on December 2, 2016, 3:51 PM
  */
 
+#include <cmath>
+
 #include "cRegArchModel.h"
 
 cRegArchModel::cRegArchModel() {
@@ -37,3 +39,18 @@ double cRegArchModel::mLogLikelihood(cData *theData){
     }
 }
 
+void cRegArchModel::mSimulate(cData& theData, int t) {
+    theData.mYt->ReAlloc(t, 0);
+    theData.mMt->ReAlloc(t, 0);
+    theData.mHt->ReAlloc(t, 0);
+    theData.mUt->ReAlloc(t, 0);
+    theData.mEt->ReAlloc(t, 0);
+    
+    theData.mEt = mResiduals->mSimul(t);
+    for (int i = 0; i < t; i++) {
+        theData.mMt = mGlobalMean->mComputeMean(theData, t);
+        theData.mHt = mGlobalVar->mComputeVar(theData, t);
+        theData.mYt = theData.mMt[t] + sqrt(theData.mHt[t]) * theData.mEt[t];
+        theData.mUt = theData.mYt[t] - theData.mMt[t];
+    }
+}

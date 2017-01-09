@@ -13,7 +13,7 @@
 
 #include "cGlobalVar.h"
 
-cGlobalVar::cGlobalVar() {
+cGlobalVar::cGlobalVar() : mVar() {
 }
 
 cGlobalVar::cGlobalVar(const cGlobalVar& orig) {
@@ -31,4 +31,12 @@ double cGlobalVar::mComputeVar(const cData& theData, int theNbCompute) const {
      Ne pas oublier de rajouter la constante et l'autre facteur !!!!
      */
     return myVar;
+}
+
+void cGlobalVar::addVar(cVarModel *theModel){
+    mVar.push_back(theModel->ptrCopy());
+}
+
+int cGlobalVar::sizeVar() const {
+    return mVar.size();
 }
