@@ -18,6 +18,7 @@ cData::cData() {
     mHt = new cGSLVector(1,1);
     mYt = new cGSLVector(1,1);
     mUt = new cGSLVector(1,1);
+    mMt = new cGSLVector(1,1);
 }
 
 cData::cData(const cData& orig) {
