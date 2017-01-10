@@ -31,10 +31,10 @@ double cRegArchModel::mLogLikelihood(cData *theData){
     for (int i=0; i<theData->mYt->GetSize(); i++) {
         (*(theData->mHt))[i] = mGlobalVar->mComputeVar(*theData,i);
         (*(theData->mMt))[i] = mGlobalMean->mComputeMean(*theData,i); //myMean := Yt - Ut
-        (*(theData->mUt))[i] = (*(theData->mMt))[i] + (*(theData->mYt))[i]; 
+        (*(theData->mUt))[i] = (*(theData->mYt))[i] - (*(theData->mMt))[i]; 
         (*(theData->mEt))[i] = (*(theData->mUt))[i] / sqrt((*(theData->mHt))[i]);
         
-        myLogLikelihood += -(1/2)*log((*(theData->mHt))[i])
+        myLogLikelihood += -(0.5)*log((*(theData->mHt))[i])
                             + mResiduals->mDensite((*(theData->mEt))[i],true);
     }
 }
