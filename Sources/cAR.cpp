@@ -40,3 +40,7 @@ cMeanModel* cAR::ptrCopy() const{
     return new cAR(*this); 
 }
 
+computeGrad
+
+computeNumericGrad
+
