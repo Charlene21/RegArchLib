@@ -15,6 +15,7 @@
 #define CAR_H
 
 #include "cMeanModel.h"
+#include "cGradient.h"
 
 class cAR : public cMeanModel {
 public:
@@ -22,6 +23,7 @@ public:
     cAR(const cGSLVector& theParam);
     cAR(const cAR& orig);
     virtual double mComputeMean(const cData& theData, int theNbCompute) const;
+    cGSLVector* mGradient(const cData& theData, int theGradSize, int theNbCompute);
     virtual cMeanModel* ptrCopy() const;
     virtual ~cAR();
 private:

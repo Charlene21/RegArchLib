@@ -12,8 +12,7 @@
  */
 
 #include "cGlobalMean.h"
-#include "cAR.h"
-#include "cMA.h"
+
 
 cGlobalMean::cGlobalMean() : mMean() {
       
@@ -42,4 +41,8 @@ double cGlobalMean::mComputeMean(const cData& theData, int theNbCompute) const {
      Ne pas oublier de rajouter la constante et l'autre facteur !!!!
      */
     return myMean;
+}
+
+double cGlobalMean::mGradient(cGradient *theGrad) {
+    return 0;
 }

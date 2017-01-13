@@ -26,6 +26,7 @@ public:
     cMeanModel(const cGSLVector& theParam);
     cMeanModel(const cMeanModel& orig);
     cData& operator = (const cData & theData);
+    int mGetSize();
     virtual double mComputeMean(const cData& theData, int theNbCompute) const = 0; //passage par copie => ajouter référence pour ne pas recopier
     virtual cMeanModel* ptrCopy() const = 0;
     virtual ~cMeanModel();

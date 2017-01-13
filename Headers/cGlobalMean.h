@@ -15,6 +15,9 @@
 #define CGLOBALMEAN_H
 #include <list>
 #include "cMeanModel.h"
+#include "cGradient.h"
+#include "cAR.h"
+#include "cMA.h"
 
 class cGlobalMean {
 public:
@@ -24,7 +27,7 @@ public:
     double mComputeMean(const cData& theData, int theNbCompute) const;   
     void addMean (cMeanModel *theModel);
     int sizeMean () const;
-    double mGradient();
+    double mGradient(cGradient *theGrad);
     virtual ~cGlobalMean();
 private:
 

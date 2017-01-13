@@ -21,13 +21,11 @@ double cNormResiduals::mDensite(double x, bool logarithme) const {
     }
 }
 
-cGSLVector* cNormResiduals::mSimul(int size) {
-    cGSLVector* myVect = new cGSLVector(size);
+void cNormResiduals::mSimul(cData *theData, int size) {
     gsl_rng* rng = gsl_rng_alloc(gsl_rng_default);
     for (int i = 0; i < size; i++) {
-        myVect[i] = gsl_ran_gaussian(rng, 1);
-    } 
-    return myVect;
+       theData->mEt[i] = gsl_ran_gaussian(rng, 1);
+    }
 }
 
 void cNormResiduals::mGradient(cData& data, cGSLVector& vect) const {

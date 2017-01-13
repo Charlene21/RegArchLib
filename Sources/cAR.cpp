@@ -31,7 +31,8 @@ cAR::~cAR() {
 double cAR:: mComputeMean(const cData& theData, int theNbCompute) const{
     double res = 0;
     for (int i = 0; i< mParams->GetSize(); i++){
-        res += (*mParams)[i]* (*(theData.mYt))[theNbCompute-(i+1)];
+        if (theNbCompute-i-1 >= 0)
+            res += (*mParams)[i]* (*(theData.mYt))[theNbCompute-(i+1)];
     }
     return res;
 }
@@ -40,3 +41,13 @@ cMeanModel* cAR::ptrCopy() const{
     return new cAR(*this); 
 }
 
+cGSLVector* cAR::mGradient(const cData& theData, int theGradSize, int theNbCompute) {
+    cGSLVector *myPartialGrad = new cGSLVector(theGradSize);
+    
+    //coordonnées pour les AR : de 1 à 1+nbAR
+    for (int i=1; i<this->mGetSize()+1; i++) {
+        //Yt-i pour ARi
+        if (theNbCompute-i-1 >= 0)
+            (*myPartialGrad)[i] = (*(theData.mYt))[theNbCompute-i-1];
+    }
+}

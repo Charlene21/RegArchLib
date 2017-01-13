@@ -26,6 +26,10 @@ cMeanModel::cMeanModel(const cMeanModel& orig) {
     
 }
 
+int cMeanModel::mGetSize() {
+    return this->mParams->GetSize();
+}
+
 cMeanModel::~cMeanModel() {
 }
 

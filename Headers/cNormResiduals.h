@@ -17,7 +17,7 @@ public:
     cGSLVector mParams;
     cNormResiduals();
     cNormResiduals(const cResiduals& orig);
-    cGSLVector* mSimul(int size);
+    void mSimul(cData* theData, int size);
     double mDensite(double, bool logarithme) const;
     void mGradient(cData &data, cGSLVector &vect) const;
     virtual ~cNormResiduals();
