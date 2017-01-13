@@ -25,9 +25,9 @@ public:
     cGlobalVar();
     cGlobalVar(const cGlobalVar& orig);
     double mComputeVar(const cData& theData, int theNbCompute) const;
-    double mGradient();
-    void addVar(cVarModel *theModel);
-    int sizeVar() const;
+    double mComputeGradient();
+    void mAddVar(cVarModel *theModel);
+    int mSizeVar() const;
     virtual ~cGlobalVar();
 private:
 

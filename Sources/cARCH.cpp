@@ -34,6 +34,24 @@ double cARCH:: mComputeVar(const cData& theData, int theNbCompute) const{
     return res;
 }
 
+cGSLVector* cARCH::mGradient(const cData& theData, int theGradSize, int theNbCompute, int theBeginIndex, const cGradient& thePrecGrad) {
+    cGSLVector *myPartialGrad = new cGSLVector(theGradSize);
+    
+    //coordonnées pour les MA : de nbAR+1 à nbAR+1+nbMA
+    for (int i=theBeginIndex; i<this->mGetSize()+theBeginIndex; i++) {
+        //Yt-i pour ARi
+        if (theNbCompute-i-1 >= 0)
+            (*myPartialGrad)[i] = (*(theData.mUt))[theNbCompute-i-1]*(*(theData.mUt))[theNbCompute-i-1];
+    }
+    
+    for (int i=0; i<theGradSize; i++) {
+        for (int k=0; k<this->mGetSize(); k++) {
+            (*myPartialGrad)[i] += 2 * (*(this->mParams))[k] * (*(thePrecGrad.mGradientMean))[i][theNbCompute-k-1] * (*(theData.mUt))[theNbCompute-k-1] ;
+        }
+    }
+    return myPartialGrad;
+}
+
 cVarModel* cARCH::ptrCopy() const{
     return new cARCH(*this);
 }

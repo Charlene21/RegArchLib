@@ -41,14 +41,15 @@ cMeanModel* cAR::ptrCopy() const{
     return new cAR(*this); 
 }
 
-cGSLVector* cAR::mGradient(const cData& theData, int theGradSize, int theNbCompute) {
+cGSLVector* cAR::mGradient(const cData& theData, int theGradSize, int theNbCompute, int theBeginIndex, const cGradient& thePrecGrad) {
     cGSLVector *myPartialGrad = new cGSLVector(theGradSize);
     
-    //coordonnées pour les AR : de 1 à 1+nbAR
-    for (int i=1; i<this->mGetSize()+1; i++) {
+    //coordonnées pour les AR : de 1 à nbAR
+    for (int i=theBeginIndex; i<this->mGetSize()+theBeginIndex; i++) {
         //Yt-i pour ARi
         if (theNbCompute-i-1 >= 0)
             (*myPartialGrad)[i] = (*(theData.mYt))[theNbCompute-i-1];
     }
+    return myPartialGrad;
 }
 

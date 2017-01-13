@@ -33,10 +33,10 @@ double cGlobalVar::mComputeVar(const cData& theData, int theNbCompute) const {
     return myVar;
 }
 
-void cGlobalVar::addVar(cVarModel *theModel){
+void cGlobalVar::mAddVar(cVarModel *theModel){
     mVar.push_back(theModel->ptrCopy());
 }
 
-int cGlobalVar::sizeVar() const {
+int cGlobalVar::mSizeVar() const {
     return mVar.size();
 }

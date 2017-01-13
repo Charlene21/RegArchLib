@@ -15,6 +15,7 @@
 #define CMEANMODEL_H
 
 #include "cData.h"
+#include "cGradient.h"
 #include "StdAfxVectorAndMatrix.h"
 using namespace VectorAndMatrixNameSpace;
 
@@ -28,6 +29,7 @@ public:
     cData& operator = (const cData & theData);
     int mGetSize();
     virtual double mComputeMean(const cData& theData, int theNbCompute) const = 0; //passage par copie => ajouter référence pour ne pas recopier
+    virtual cGSLVector* mGradient(const cData& theData, int theGradSize, int theNbCompute, int theBeginIndex, const cGradient& thePrecGrad) = 0;
     virtual cMeanModel* ptrCopy() const = 0;
     virtual ~cMeanModel();
 private:

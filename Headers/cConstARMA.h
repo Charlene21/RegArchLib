@@ -5,30 +5,31 @@
  */
 
 /* 
- * File:   cARCH.h
+ * File:   cConstARMA.h
  * Author: paviotch
  *
- * Created on December 6, 2016, 10:13 AM
+ * Created on January 10, 2017, 11:12 AM
  */
 
-#ifndef CARCH_H
-#define CARCH_H
+#ifndef CCONSTARMA_H
+#define CCONSTARMA_H
 
 #include "cMeanModel.h"
-#include "cVarModel.h"
 
-class cARCH : public cVarModel {
+class cConstARMA : public cMeanModel {
 public:
-    cARCH();
-    cARCH(const cGSLVector& theParam);
-    cARCH(const cARCH& orig);
-    virtual ~cARCH();
-    double mComputeVar(const cData& theData, int theNbCompute) const;
+    cConstARMA();
+    cConstARMA(const cConstARMA& orig);
+    
+    virtual double mComputeMean(const cData& theData, int theNbCompute) const;
     virtual cGSLVector* mGradient(const cData& theData, int theGradSize, int theNbCompute, int theBeginIndex, const cGradient& thePrecGrad);
-    cVarModel* ptrCopy() const;
+
+    virtual cMeanModel* ptrCopy() const;
+    
+    virtual ~cConstARMA();
 private:
 
 };
 
-#endif /* CARCH_H */
+#endif /* CCONSTARMA_H */
 

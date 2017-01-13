@@ -24,6 +24,10 @@ cVarModel::cVarModel(const cVarModel& orig) {
     mParams = new cGSLVector(*(orig.mParams));
 }
 
+double cVarModel:: mGetSize(){
+    return this->mParams->GetSize();
+}
+
 cData& cVarModel::operator = (const cData & theData){
     
 }

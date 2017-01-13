@@ -23,7 +23,7 @@ public:
     cAR(const cGSLVector& theParam);
     cAR(const cAR& orig);
     virtual double mComputeMean(const cData& theData, int theNbCompute) const;
-    cGSLVector* mGradient(const cData& theData, int theGradSize, int theNbCompute);
+    virtual cGSLVector* mGradient(const cData& theData, int theGradSize, int theNbCompute, int theBeginIndex, const cGradient& thePrecGrad);
     virtual cMeanModel* ptrCopy() const;
     virtual ~cAR();
 private:
