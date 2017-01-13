@@ -51,3 +51,4 @@ cGSLVector* cAR::mGradient(const cData& theData, int theGradSize, int theNbCompu
             (*myPartialGrad)[i] = (*(theData.mYt))[theNbCompute-i-1];
     }
 }
+
