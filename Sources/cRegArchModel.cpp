@@ -11,6 +11,8 @@
  * Created on December 2, 2016, 3:51 PM
  */
 
+#include <cmath>
+
 #include "cRegArchModel.h"
 
 cRegArchModel::cRegArchModel() {
@@ -29,11 +31,26 @@ double cRegArchModel::mLogLikelihood(cData *theData){
     for (int i=0; i<theData->mYt->GetSize(); i++) {
         (*(theData->mHt))[i] = mGlobalVar->mComputeVar(*theData,i);
         (*(theData->mMt))[i] = mGlobalMean->mComputeMean(*theData,i); //myMean := Yt - Ut
-        (*(theData->mUt))[i] = (*(theData->mMt))[i] + (*(theData->mYt))[i]; 
+        (*(theData->mUt))[i] = (*(theData->mYt))[i] - (*(theData->mMt))[i]; 
         (*(theData->mEt))[i] = (*(theData->mUt))[i] / sqrt((*(theData->mHt))[i]);
         
-        myLogLikelihood += -(1/2)*log((*(theData->mHt))[i])
+        myLogLikelihood += -(0.5)*log((*(theData->mHt))[i])
                             + mResiduals->mDensite((*(theData->mEt))[i],true);
     }
 }
 
+void cRegArchModel::mSimulate(cData& theData, int t) {
+    theData.mYt->ReAlloc(t, 0.);
+    theData.mMt->ReAlloc(t, 0.);
+    theData.mHt->ReAlloc(t, 0.);
+    theData.mUt->ReAlloc(t, 0.);
+    theData.mEt->ReAlloc(t, 0.);
+    
+    theData.mEt = mResiduals->mSimul(t);
+    for (int i = 0; i < t; i++) {
+        theData.mMt[t] = mGlobalMean->mComputeMean(theData, t);
+        theData.mHt[t] = mGlobalVar->mComputeVar(theData, t);
+        theData.mYt[t] = (*theData.mMt)[t] + sqrt((*theData.mHt)[t]) * (*theData.mEt)[t];
+        theData.mUt[t] = (*theData.mYt)[t] - (*theData.mMt)[t];
+    }
+}
