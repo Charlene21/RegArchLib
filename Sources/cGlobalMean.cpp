@@ -37,12 +37,19 @@ double cGlobalMean::mComputeMean(const cData& theData, int theNbCompute) const {
     for (std::list<cMeanModel*>::const_iterator myIt = mMean.begin(); myIt != mMean.end(); ++myIt) {
         myMean += (*myIt)->mComputeMean(theData, theNbCompute);
     }
-    /* ATTENTION 
-     Ne pas oublier de rajouter la constante et l'autre facteur !!!!
-     */
+
     return myMean;
 }
 
-double cGlobalMean::mGradient(cGradient *theGrad) {
-    return 0;
+//Précondition : les cMeanModels sont rangés dans le bon ordre : cARMA - CAR - CMA (meme ordre que le gradient)
+cGSLVector* cGlobalMean::mComputeGradient(int theNbCompute, const cData &theData, cGradient *theGrad) {
+    cGSLVector *myCumulGrad = new cGSLVector(theGrad->mGradientMean->GetNRow());
+    cGSLVector *myMeanGrad = new cGSLVector(theGrad->mGradientMean->GetNRow());
+    int myBeginIndex = 0;
+    for (std::list<cMeanModel*>::const_iterator myIt = mMean.begin(); myIt != mMean.end(); ++myIt) {
+        myMeanGrad = (*myIt)->mGradient(theData,theGrad->mGradientMean->GetNRow(),theNbCompute,myBeginIndex,*theGrad);
+        *myCumulGrad += *myMeanGrad;
+        myBeginIndex += (*myIt)->mGetSize();
+    }
+    return myCumulGrad;
 }

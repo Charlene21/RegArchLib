@@ -27,7 +27,7 @@ public:
     double mComputeMean(const cData& theData, int theNbCompute) const;   
     void addMean (cMeanModel *theModel);
     int sizeMean () const;
-    double mGradient(cGradient *theGrad);
+    cGSLVector* mComputeGradient(int theNbCompute, const cData &theData, cGradient *theGrad);
     virtual ~cGlobalMean();
 private:
 

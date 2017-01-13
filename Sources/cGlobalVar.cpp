@@ -40,3 +40,15 @@ void cGlobalVar::mAddVar(cVarModel *theModel){
 int cGlobalVar::mSizeVar() const {
     return mVar.size();
 }
+
+cGSLVector* cGlobalVar::mComputeGradient(int theNbCompute, const cData &theData, cGradient *theGrad){
+    cGSLVector *myCumulGrad = new cGSLVector(theGrad->mGradientVar->GetNRow());
+    cGSLVector *myVarGrad = new cGSLVector(theGrad->mGradientVar->GetNRow());
+    int myBeginIndex = 0;
+    for (std::list<cVarModel*>::const_iterator myIt = mVar.begin(); myIt != mVar.end(); ++myIt) {
+        myVarGrad = (*myIt)->mGradient(theData,theGrad->mGradientVar->GetNRow(),theNbCompute,myBeginIndex,*theGrad);
+        *myCumulGrad += *myVarGrad;
+        myBeginIndex += (*myIt)->mGetSize();
+    }
+    return myCumulGrad;
+}
