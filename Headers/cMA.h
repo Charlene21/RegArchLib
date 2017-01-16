@@ -25,6 +25,7 @@ public:
     double mComputeMean(const cData& theData, int theNbCompute) const;
     virtual cGSLVector* mGradient(const cData& theData, int theGradSize, int theNbCompute, int theBeginIndex, const cGradient& thePrecGrad);
     cMeanModel* ptrCopy() const;
+    void VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex);
 private:
 
 };

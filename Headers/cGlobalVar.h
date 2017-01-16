@@ -28,6 +28,7 @@ public:
     cGSLVector* mComputeGradient(int theNbCompute, const cData &theData, cGradient *theGrad);
     void mAddVar(cVarModel *theModel);
     int mSizeVar() const;
+    void VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex);
     virtual ~cGlobalVar();
 private:
 

@@ -21,10 +21,13 @@ class cConstGARCH : public cVarModel {
 public:
     cConstGARCH();
     cConstGARCH(const cConstGARCH& orig);
+    
+    cConstGARCH(const cGSLVector& theParam);
     virtual double mComputeVar(const cData& theData, int theNbCompute) const; //passage par copie => ajouter référence pour ne pas recopier
-    virtual cGSLVector* mGradient(const cData& theData, int theGradSize, int theNbCompute, int theBeginIndex, const cGradient& thePrecGrad) = 0;
+    virtual cGSLVector* mGradient(const cData& theData, int theGradSize, int theNbCompute, int theBeginIndex, const cGradient& thePrecGrad);
     virtual cVarModel* ptrCopy() const;
     virtual ~cConstGARCH();
+    void VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex);
 private:
 
 };

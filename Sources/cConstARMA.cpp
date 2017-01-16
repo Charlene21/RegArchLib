@@ -16,7 +16,12 @@
 cConstARMA::cConstARMA() {
 }
 
-cConstARMA::cConstARMA(const cConstARMA& orig) {
+cConstARMA::cConstARMA(const cGSLVector& theParam) : cMeanModel(theParam) {
+    
+}
+
+cConstARMA::cConstARMA(const cConstARMA& orig) : cMeanModel(orig) {
+    
 }
 
 double cConstARMA::mComputeMean(const cData& theData, int theNbCompute) const {
@@ -27,8 +32,24 @@ cGSLVector* cConstARMA::mGradient(const cData& theData, int theGradSize, int the
     cGSLVector *myPartialGrad = new cGSLVector(theGradSize);
     
     (*myPartialGrad)[theBeginIndex] = 1;
+    
+    return myPartialGrad;
+}
+
+cMeanModel* cConstARMA::ptrCopy() const{
+    return new cConstARMA(*this);
 }
 
 cConstARMA::~cConstARMA() {
 }
 
+void cConstARMA::VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex)
+	{
+		uint mySize = theSrcVect.GetSize() ;
+		if (this->mParams->GetSize() + theIndex > mySize)
+			throw cError("Wrong size") ;
+                for (int i = theIndex; i< theSrcVect.GetSize(); i++){
+                    (*mParams)[i] = theSrcVect[i];
+                }
+             
+	}

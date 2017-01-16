@@ -28,6 +28,7 @@ public:
     void addMean (cMeanModel *theModel);
     int sizeMean () const;
     cGSLVector* mComputeGradient(int theNbCompute, const cData &theData, cGradient *theGrad);
+    void VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex);
     virtual ~cGlobalMean();
 private:
 

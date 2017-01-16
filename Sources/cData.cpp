@@ -14,11 +14,11 @@
 #include "cData.h"
 
 cData::cData() {
-    mEt = new cGSLVector(1,1);
-    mHt = new cGSLVector(1,1);
-    mYt = new cGSLVector(1,1);
-    mUt = new cGSLVector(1,1);
-    mMt = new cGSLVector(1,1);
+    mEt = new cGSLVector(5,1);
+    mHt = new cGSLVector(5,1);
+    mYt = new cGSLVector(5,1);
+    mUt = new cGSLVector(5,1);
+    mMt = new cGSLVector(5,1);
 }
 
 cData::cData(const cData& orig) {

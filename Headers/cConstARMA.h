@@ -19,12 +19,14 @@
 class cConstARMA : public cMeanModel {
 public:
     cConstARMA();
+    cConstARMA(const cGSLVector& theParam);
     cConstARMA(const cConstARMA& orig);
     
     virtual double mComputeMean(const cData& theData, int theNbCompute) const;
     virtual cGSLVector* mGradient(const cData& theData, int theGradSize, int theNbCompute, int theBeginIndex, const cGradient& thePrecGrad);
 
     virtual cMeanModel* ptrCopy() const;
+    void VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex);
     
     virtual ~cConstARMA();
 private:

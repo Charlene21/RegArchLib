@@ -22,8 +22,12 @@ void cGlobalMean :: addMean (cMeanModel *theModel){
     mMean.push_back(theModel->ptrCopy());
 }
 
-int cGlobalMean :: sizeMean () const{
-    return mMean.size();
+int cGlobalMean :: sizeMean () const{    
+    int myRes=0;
+    for (std::list<cMeanModel*>::const_iterator myIt = mMean.begin(); myIt != mMean.end(); ++myIt) {
+        myRes += (*myIt)->mGetSize();
+    }
+    return myRes;
 }
 
 cGlobalMean::cGlobalMean(const cGlobalMean& orig) {
@@ -53,3 +57,13 @@ cGSLVector* cGlobalMean::mComputeGradient(int theNbCompute, const cData &theData
     }
     return myCumulGrad;
 }
+
+void cGlobalMean::VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex)
+	{
+	uint myIndexCour = theIndex ;
+        for (std::list<cMeanModel*>::const_iterator myIt = mMean.begin(); myIt != mMean.end(); ++myIt) {
+            (*myIt)->VectorToRegArchParam(theSrcVect,myIndexCour);
+            myIndexCour += (*myIt)->mGetSize() ;
+            }
+
+	}

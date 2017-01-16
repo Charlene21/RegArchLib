@@ -26,6 +26,7 @@ public:
     virtual cGSLVector* mGradient(const cData& theData, int theGradSize, int theNbCompute, int theBeginIndex, const cGradient& thePrecGrad);
     virtual cVarModel* ptrCopy() const;
     virtual ~cGARCH();
+    void VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex);
 private:
 
 };

@@ -38,7 +38,11 @@ void cGlobalVar::mAddVar(cVarModel *theModel){
 }
 
 int cGlobalVar::mSizeVar() const {
-    return mVar.size();
+    int myRes=0;
+    for (std::list<cVarModel*>::const_iterator myIt = mVar.begin(); myIt != mVar.end(); ++myIt) {
+        myRes += (*myIt)->mGetSize();
+    }
+    return myRes;
 }
 
 cGSLVector* cGlobalVar::mComputeGradient(int theNbCompute, const cData &theData, cGradient *theGrad){
@@ -52,3 +56,13 @@ cGSLVector* cGlobalVar::mComputeGradient(int theNbCompute, const cData &theData,
     }
     return myCumulGrad;
 }
+
+void cGlobalVar::VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex)
+	{
+	uint myIndexCour = theIndex ;
+        for (std::list<cVarModel*>::const_iterator myIt = mVar.begin(); myIt != mVar.end(); ++myIt) {
+            (*myIt)->VectorToRegArchParam(theSrcVect,myIndexCour);
+            myIndexCour += (*myIt)->mGetSize() ;
+            }
+
+	}

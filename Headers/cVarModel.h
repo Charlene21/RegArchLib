@@ -30,6 +30,7 @@ public:
     virtual double mComputeVar(const cData& theData, int theNbCompute) const = 0; //passage par copie => ajouter référence pour ne pas recopier
     virtual cGSLVector* mGradient(const cData& theData, int theGradSize, int theNbCompute, int theBeginIndex, const cGradient& thePrecGrad) = 0;
     virtual cVarModel* ptrCopy() const = 0;
+    virtual void VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex) = 0;
     virtual ~cVarModel();
 private:
 

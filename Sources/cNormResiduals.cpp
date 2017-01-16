@@ -31,3 +31,6 @@ void cNormResiduals::mSimul(cData *theData, int size) {
 void cNormResiduals::mGradient(cData& data, cGSLVector& vect) const {
     
 }
+
+cNormResiduals::~cNormResiduals() {
+}

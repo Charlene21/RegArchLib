@@ -29,8 +29,13 @@ public:
     cRegArchModel(const cRegArchModel& orig); 
     
     double mLogLikelihood(cData *theData);
+    void reconstruction(cData *theData);
     void mSimulate(cData &data, int t);
-    void mComputeGradient(cData &theData, int t, cGradient * theGrad);
+    cGSLVector * mComputeGradient(cData &theData, int t, cGradient * theGrad);
+    cGSLVector* mGradVraisemblance(cData &theData, int nbDates);
+    void RegArchParamToVector(cGSLVector& theDestVect) const;
+    void VectorToRegArchParam(const cGSLVector& theSrcParam);
+    cGSLVector* mComputeGradNumeric(double h, cData &theData);
     virtual ~cRegArchModel();
 private:
 

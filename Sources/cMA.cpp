@@ -30,7 +30,8 @@ cMA::~cMA() {
 double cMA:: mComputeMean(const cData& theData, int theNbCompute) const{
     double res = 0;
     for (int i = 0; i< mParams->GetSize(); i++){
-        res += (*mParams)[i]* (*(theData.mUt))[theNbCompute-(i+1)];
+        if (theNbCompute-i-1 >= 0)
+            res += (*mParams)[i]* (*(theData.mUt))[theNbCompute-(i+1)];
     }
     return res;
 }
@@ -41,8 +42,8 @@ cGSLVector* cMA::mGradient(const cData& theData, int theGradSize, int theNbCompu
     //coordonnées pour les MA : de nbAR+1 à nbAR+1+nbMA
     for (int i=theBeginIndex; i<this->mGetSize()+theBeginIndex; i++) {
         //Yt-i pour ARi
-        if (theNbCompute-i-1 >= 0)
-            (*myPartialGrad)[i] = (*(theData.mUt))[theNbCompute-i-1];
+        if (theNbCompute-i-1-theBeginIndex >= 0)
+            (*myPartialGrad)[i] = (*(theData.mUt))[theNbCompute-i-1-theBeginIndex];
     }
     
     for (int i=0; i<theGradSize; i++) {
@@ -57,3 +58,14 @@ cMeanModel* cMA::ptrCopy() const{
     return new cMA(*this);
 }
 
+
+void cMA::VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex)
+	{
+		uint mySize = theSrcVect.GetSize() ;
+		if (this->mParams->GetSize() + theIndex > mySize)
+			throw cError("Wrong size") ;
+                for (int i = theIndex; i< theSrcVect.GetSize(); i++){
+                    (*mParams)[i] = theSrcVect[i];
+                }
+             
+	}

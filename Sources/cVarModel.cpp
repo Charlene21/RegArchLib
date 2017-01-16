@@ -35,3 +35,14 @@ cData& cVarModel::operator = (const cData & theData){
 cVarModel::~cVarModel() {
 }
 
+void cVarModel::VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex)
+	{
+		uint mySize = theSrcVect.GetSize() ;
+		if (this->mParams->GetSize() + theIndex > mySize)
+			throw cError("Wrong size") ;
+		for (int i = theIndex; i< theSrcVect.GetSize(); i++){
+                    (*mParams)[i] = theSrcVect[i];
+                }
+             
+	}
+

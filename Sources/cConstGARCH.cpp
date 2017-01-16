@@ -16,7 +16,10 @@
 cConstGARCH::cConstGARCH() {
 }
 
-cConstGARCH::cConstGARCH(const cConstGARCH& orig) {
+cConstGARCH::cConstGARCH(const cGSLVector& theParam) : cVarModel(theParam) {
+    
+}
+cConstGARCH::cConstGARCH(const cConstGARCH& orig) : cVarModel(orig){
 }
 double cConstGARCH::mComputeVar(const cData& theData, int theNbCompute) const {
     return (*(this->mParams))[0];
@@ -26,12 +29,23 @@ cGSLVector* cConstGARCH::mGradient(const cData& theData, int theGradSize, int th
     cGSLVector *myPartialGrad = new cGSLVector(theGradSize);
     
     (*myPartialGrad)[theBeginIndex] = 1;
+    return myPartialGrad;
 }
 
 cVarModel* cConstGARCH::ptrCopy() const{
-    
+     return new cConstGARCH(*this);
 }
 
 cConstGARCH::~cConstGARCH() {
 }
 
+void cConstGARCH::VectorToRegArchParam(const cGSLVector& theSrcVect, uint theIndex)
+	{
+		uint mySize = theSrcVect.GetSize() ;
+		if (this->mParams->GetSize() + theIndex > mySize)
+			throw cError("Wrong size") ;
+                for (int i = theIndex; i< theSrcVect.GetSize(); i++){
+                    (*mParams)[i] = theSrcVect[i];
+                }
+             
+	}
