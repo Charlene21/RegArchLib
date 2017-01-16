@@ -55,14 +55,32 @@ void cRegArchModel::mSimulate(cData& theData, int t) {
     }
 }
 
-cGSLVector* cRegArchModel::mComputeGradient(cData &theData, int t, cGradient * theGrad){
-    const cGradient *myGradPrec = new cGradient(theGrad);
+void cRegArchModel::mComputeGradient(cData &theData, int t, cGradient * theGrad){
+    const cGradient *myGradPrec = new cGradient(*theGrad);
     this->mSimulate(theData,t);
-    double mySigma = sqrt(theData.mHt[t]);
-    double myE = (theData.mYt[t] - theData.mMt[t]) / mySigma;
+    double mySigma = sqrt((*theData.mHt)[t]);
+    double myE = ((*theData.mYt)[t] - (*theData.mMt)[t]) / mySigma;
     cGSLVector* myGradMean = this->mGlobalMean->mComputeGradient(t, theData, theGrad);
     cGSLVector* myGradVar = this->mGlobalVar->mComputeGradient(t, theData, theGrad);
-    //theGrad->mGradientMean->ReAlloc(myGradPrec->mGradientMean->GetNRow(),myGradPrec->mGradientMean->GetNCol()+1,0);
+    
+    theGrad->mGradientMean->ReAlloc(myGradPrec->mGradientMean->GetNRow(),myGradPrec->mGradientMean->GetNCol()+1,0);
+    theGrad->mGradientVar->ReAlloc(myGradPrec->mGradientMean->GetNRow(),myGradPrec->mGradientMean->GetNCol()+1,0);
 
-    //theGrad->mGradientMean[i];
+    for (int i = 0; i < theGrad->mGradientMean->GetNRow(); i++)
+    {
+        for (int j = 0; j < theGrad->mGradientMean->GetNCol(); j++){
+            
+            if (j==theGrad->mGradientMean->GetNCol()-1){
+                 (*theGrad->mGradientMean)[i][j] = (*myGradMean)[i];
+                 (*theGrad->mGradientVar)[i][j] = (*myGradVar)[i];
+            }
+               
+            else{
+                 (*theGrad->mGradientMean)[i][j] = (*myGradPrec->mGradientMean)[i][j] ;
+                 (*theGrad->mGradientVar)[i][j] = (*myGradPrec->mGradientVar)[i][j] ;
+            }
+  
+        }
+    }
+   
 }

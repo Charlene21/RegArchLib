@@ -14,8 +14,8 @@ using namespace VectorAndMatrixNameSpace;
 
 class cGradient {
 public:
-    cGSLVector* mGradientMean;
-    cGSLVector* mGradientVar;
+    cGSLMatrix* mGradientMean;
+    cGSLMatrix* mGradientVar;
     /* Ordre des parametres
      * cARMA
      * AR
@@ -26,7 +26,7 @@ public:
      * Paramètres loi
      */
     cGradient(int sizeMean, int sizeVar, int sizeParams);
-    
+    cGradient(const cGradient &origin);
     ~cGradient();
 };
 
