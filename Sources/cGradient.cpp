@@ -2,6 +2,6 @@
 #include "cGradient.h"
 
 cGradient::cGradient(int theSizeMean, int theSizeVar, int theSizeParams) {
-    mGradientMean = new cGSLMatrix(theSizeMean + theSizeVar + theSizeParams, 1, 0);
-    mGradientVar = new cGSLMatrix(theSizeMean + theSizeVar + theSizeParams, 1, 0);
+    mGradientMean = new cGSLVector(theSizeMean + theSizeVar + theSizeParams, 0);
+    mGradientVar = new cGSLVector(theSizeMean + theSizeVar + theSizeParams, 0);
 }

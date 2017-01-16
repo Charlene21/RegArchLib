@@ -30,6 +30,7 @@ public:
     
     double mLogLikelihood(cData *theData);
     void mSimulate(cData &data, int t);
+    cGSLVector* mComputeGradient();
     virtual ~cRegArchModel();
 private:
 

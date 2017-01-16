@@ -54,3 +54,15 @@ void cRegArchModel::mSimulate(cData& theData, int t) {
         theData.mUt[t] = (*theData.mYt)[t] - (*theData.mMt)[t];
     }
 }
+
+cGSLVector* cRegArchModel::mComputeGradient(cData &theData, int t, cGradient * theGrad){
+    const cGradient *myGradPrec = new cGradient(theGrad);
+    this->mSimulate(theData,t);
+    double mySigma = sqrt(theData.mHt[t]);
+    double myE = (theData.mYt[t] - theData.mMt[t]) / mySigma;
+    cGSLVector* myGradMean = this->mGlobalMean->mComputeGradient(t, theData, theGrad);
+    cGSLVector* myGradVar = this->mGlobalVar->mComputeGradient(t, theData, theGrad);
+    //theGrad->mGradientMean->ReAlloc(myGradPrec->mGradientMean->GetNRow(),myGradPrec->mGradientMean->GetNCol()+1,0);
+
+    //theGrad->mGradientMean[i];
+}
